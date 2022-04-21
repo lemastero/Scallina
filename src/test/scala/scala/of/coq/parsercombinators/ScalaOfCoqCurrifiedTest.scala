@@ -4,8 +4,8 @@ import scala.of.coq.parsercombinators.compiler.ScalaOfCoq
 import scala.of.coq.parsercombinators.parser.CoqParser
 
 import org.scalatest.Finders
-import org.scalatest.FunSuite
-import org.scalatest.Matchers.convertToAnyShouldWrapper
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import CustomMatchers.generateScalaCode
 
@@ -13,7 +13,7 @@ import scala.of.coq.parsercombinators.compiler.Currify
 
 import scala.of.coq.parsercombinators.TestUtils.coqParserShouldFailToGenerateScalaCodeFor
 
-class ScalaOfCoqCurrifiedTest extends FunSuite {
+class ScalaOfCoqCurrifiedTest extends AnyFunSuite {
 
   implicit val curryingStrategy = Currify
 

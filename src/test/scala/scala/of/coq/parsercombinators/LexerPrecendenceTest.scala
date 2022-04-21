@@ -1,8 +1,8 @@
 package scala.of.coq.parsercombinators
 
 import org.scalatest.Finders
-import org.scalatest.FunSuite
-import org.scalatest.Matchers.convertToAnyShouldWrapper
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import CustomMatchers.identify
 import scala.of.coq.parsercombinators.lexer.CoqLexer.Identifier
@@ -10,6 +10,7 @@ import scala.of.coq.parsercombinators.lexer.CoqLexer.Keyword
 import scala.of.coq.parsercombinators.lexer.CoqLexer.NumericLit
 import scala.of.coq.parsercombinators.lexer.CoqLexer.StringLit
 import lexer.CoqLexer
+
 /**
  * While implementing the lexer, care should be
  * taken to, for example, identify the "::" token before the ":" token.
@@ -19,7 +20,7 @@ import lexer.CoqLexer
  * There should be a test for each lexer token.
  *
  */
-class LexerPrecendenceTest extends FunSuite {
+class LexerPrecendenceTest extends AnyFunSuite {
 
   test("""lexer identifies "myVar" Identifier""") { CoqLexer("myVar") should identify (Identifier("myVar")) }
   test("""lexer identifies "my_2nd_var" Identifier""") { CoqLexer("my_2nd_var") should identify (Identifier("my_2nd_var")) }

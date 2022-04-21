@@ -4,10 +4,9 @@ import scala.of.coq.parsercombinators.compiler.ScalaOfCoq
 import scala.of.coq.parsercombinators.parser.CoqParser
 
 import scala.of.coq.parsercombinators.compiler.CurryingStrategy
+import org.scalatest.funsuite.AnyFunSuite
 
-import org.scalatest.FunSuite
-
-object TestUtils extends FunSuite {
+object TestUtils extends AnyFunSuite {
   def normalizeWhitespace(scalaCode: String): String =
     """[\t ]+""".r.replaceAllIn(scalaCode, " ").trim.stripMargin('"')
 
