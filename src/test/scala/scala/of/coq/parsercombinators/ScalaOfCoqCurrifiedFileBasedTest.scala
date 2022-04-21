@@ -86,7 +86,7 @@ class ScalaOfCoqCurrifiedFileBasedTest extends AnyFunSuite {
     }
   }
 
-  ignore("""Testing all Coq file conversions to Scala """) {
+  test("""Testing all Coq file conversions to Scala """) {
 
     val allCoqFileNames = getListOfFiles(getClass.getResource("/")).filter(_.endsWith(".v"))
     val allBaseNamesWithoutExtension = allCoqFileNames.map(fileName => """(.*/)?([^/]+)\.v$""".r.replaceFirstIn(fileName, "$2"))
