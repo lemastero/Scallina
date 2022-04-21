@@ -1,7 +1,6 @@
 package scala.of.coq.parsercombinators.compiler
 
 import customtreehugger.MyForest._
-import definitions._
 import treehuggerDSL._
 
 trait CurryingStrategy {

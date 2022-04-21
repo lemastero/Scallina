@@ -1,7 +1,5 @@
 package scala.of.coq.parsercombinators.parser
 
-import scala.util.parsing.input.Positional
-
 sealed trait CoqAST {
   def toCoqCode: String
 }

@@ -1,13 +1,11 @@
 package scala.of.coq.parsercombinators.compiler
 
 import customtreehugger.MyForest._
-import definitions._
 import treehuggerDSL._
 
 import scala.of.coq.parsercombinators.parser.Argument
 import scala.of.coq.parsercombinators.parser.BetweenParenthesis
 import scala.of.coq.parsercombinators.parser.Binders
-import scala.of.coq.parsercombinators.parser.CoqAST
 import scala.of.coq.parsercombinators.parser.Definition
 import scala.of.coq.parsercombinators.parser.FixBody
 import scala.of.coq.parsercombinators.parser.Fixpoint
@@ -51,7 +49,6 @@ import scala.of.coq.parsercombinators.parser.LetConstructorArgsIn
 import scala.of.coq.parsercombinators.parser.LetPatternIn
 import scala.of.coq.parsercombinators.parser.SimpleLetIn
 import scala.of.coq.parsercombinators.parser.Record
-import scala.of.coq.parsercombinators.parser.RecordField
 import scala.of.coq.parsercombinators.parser.RecordField
 import scala.of.coq.parsercombinators.parser.AbstractRecordField
 import scala.of.coq.parsercombinators.parser.ConcreteRecordField

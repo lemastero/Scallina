@@ -1,6 +1,6 @@
 package scala.of.coq
 
-import scala.of.coq.parsercombinators.parser.CoqTermParser
+import scala.annotation.tailrec
 import scala.of.coq.parsercombinators.lexer.CoqLexer
 import scala.of.coq.parsercombinators.parser.CoqParser
 import scala.of.coq.parsercombinators.compiler.ScalaOfCoq
@@ -12,7 +12,7 @@ object Main {
     Usage: scala target/scala-2.11/scallina-assembly-<scallina-version>.jar [--uncurrify] [--source] [--trim] [--ast] [--lexer] [--coq] <coq-source-file-1.v> ... <coq-source-file-n.v>
   """
 
-  def printUsageAndExit(exitCode: Int) = {
+  def printUsageAndExit(exitCode: Int): Unit = {
     println(usage)
     System.exit(exitCode)
   }
@@ -27,7 +27,10 @@ object Main {
   val coq = Symbol("coq")
   val uncurrify = Symbol("uncurrify")
 
+  val defaultMap: OptionMap = Map[Symbol, Boolean]() withDefaultValue false
   def parseCommandLineArgs(commandLineArgs: List[String]): (OptionMap, FileNames) = {
+
+    @tailrec
     def nextArgument(optionMap: OptionMap, fileNamesAcc: FileNames, commandLineArgs: List[String]): (OptionMap, FileNames) = {
       commandLineArgs match {
         case "--source" :: tail    => nextArgument(optionMap ++ Map(source -> true), fileNamesAcc, tail)
@@ -41,10 +44,10 @@ object Main {
       }
     }
 
-    nextArgument(Map() withDefaultValue false, Nil, commandLineArgs)
+    nextArgument(defaultMap, Nil, commandLineArgs)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]) : Unit = {
     if (args.length <= 0) {
       printUsageAndExit(1)
     }
@@ -57,9 +60,9 @@ object Main {
         val fileBufferedSource = io.Source.fromFile(fileName)
         val inputString = try fileBufferedSource.mkString finally fileBufferedSource.close()
 
-        val shouldTrimCode = map('trim)
+        val shouldTrimCode = map(trim)
 
-        if (map('source)) {
+        if (map(source)) {
           println("Before parsing:")
           println(if (shouldTrimCode) inputString.trim else inputString)
           println("After parsing:")
@@ -70,12 +73,12 @@ object Main {
 
         val outputString = optionalCoqAst.fold(coqAST.toString) {
           coqTrees =>
-            val shouldPrintCoqOutput = map('coq)
+            val shouldPrintCoqOutput = map(coq)
             if (shouldPrintCoqOutput) {
               coqTrees.map(_.toCoqCode).mkString("\n")
             } else {
               val scalaOfCoq = new ScalaOfCoq(coqTrees,
-                if (map('uncurrify))
+                if (map(uncurrify))
                   NoCurrying
                 else
                   Currify
@@ -88,11 +91,11 @@ object Main {
 
         println(if (shouldTrimCode) outputString.trim else outputString)
 
-        if (map('ast)) {
+        if (map(ast)) {
           println(coqAST)
         }
 
-        if (map('lexer)) {
+        if (map(lexer)) {
           println(CoqLexer.parseAllTokens(inputString))
         }
 

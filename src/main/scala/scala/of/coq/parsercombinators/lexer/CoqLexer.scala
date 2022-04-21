@@ -1,6 +1,5 @@
 package scala.of.coq.parsercombinators.lexer
 
-import scala.annotation.migration
 import scala.util.parsing.combinator.lexical.StdLexical
 import scala.util.parsing.input.CharArrayReader
 import scala.util.parsing.input.CharArrayReader.EofCh
