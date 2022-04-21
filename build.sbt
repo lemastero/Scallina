@@ -14,5 +14,3 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "com.eed3si9n" %% "treehugger" % "0.4.4"
-
-resolvers += Resolver.sonatypeRepo("public")
