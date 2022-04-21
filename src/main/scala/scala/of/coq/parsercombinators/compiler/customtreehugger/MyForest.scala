@@ -1,8 +1,5 @@
 package scala.of.coq.parsercombinators.compiler.customtreehugger
 
-import treehugger.forest._
-import definitions._
-import treehuggerDSL._
 import java.io.PrintWriter
 import treehugger.Forest
 import treehugger.TreePrinters
@@ -15,11 +12,11 @@ trait MyTreePrinters extends TreePrinters { self: Forest =>
       case null | NoSymbol => orElse
       case sym             => f(sym)
     }
-    private def ifSym(tree: Tree, p: Symbol => Boolean) = symFn(tree, p, false)
+    private def ifSym(tree: Tree, p: Symbol => Boolean): Boolean = symFn(tree, p, false)
 
     import treehugger.api.Modifier
     import Flags._
-    override def printTree(tree: Tree) {
+    override def printTree(tree: Tree): Unit = {
       tree match {
         case EmptyTree =>
           print("")
@@ -56,6 +53,4 @@ trait MyTreePrinters extends TreePrinters { self: Forest =>
   override def newTreePrinter(writer: PrintWriter): TreePrinter = new MyTreePrinter(writer)
 }
 
-object MyForest extends Forest with MyTreePrinters { self: Forest =>
-
-}
+object MyForest extends Forest with MyTreePrinters

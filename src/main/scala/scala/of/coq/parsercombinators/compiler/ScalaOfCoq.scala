@@ -1,13 +1,11 @@
 package scala.of.coq.parsercombinators.compiler
 
 import customtreehugger.MyForest._
-import definitions._
 import treehuggerDSL._
 
 import scala.of.coq.parsercombinators.parser.Argument
 import scala.of.coq.parsercombinators.parser.BetweenParenthesis
 import scala.of.coq.parsercombinators.parser.Binders
-import scala.of.coq.parsercombinators.parser.CoqAST
 import scala.of.coq.parsercombinators.parser.Definition
 import scala.of.coq.parsercombinators.parser.FixBody
 import scala.of.coq.parsercombinators.parser.Fixpoint
@@ -51,7 +49,6 @@ import scala.of.coq.parsercombinators.parser.LetConstructorArgsIn
 import scala.of.coq.parsercombinators.parser.LetPatternIn
 import scala.of.coq.parsercombinators.parser.SimpleLetIn
 import scala.of.coq.parsercombinators.parser.Record
-import scala.of.coq.parsercombinators.parser.RecordField
 import scala.of.coq.parsercombinators.parser.RecordField
 import scala.of.coq.parsercombinators.parser.AbstractRecordField
 import scala.of.coq.parsercombinators.parser.ConcreteRecordField
@@ -112,7 +109,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
     case Assertion(_, id, binders, bodyTerm) =>
       List()
     case anythingElse =>
-      throw new IllegalStateException("The following Coq AST is not supported: " + anythingElse.toCoqCode);
+      throw new IllegalStateException("The following Coq AST is not supported: " + anythingElse.toCoqCode)
   }
 
   private def termToScalaCode(t: Term): String = treeToString(termToTreeHuggerAst(t))
@@ -145,7 +142,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
     case TupleValue(tupleTerms) =>
       convertTuple(tupleTerms, termToTreeHuggerAst)
     case anythingElse =>
-      throw new IllegalStateException("The following Coq term is not supported: " + anythingElse.toCoqCode);
+      throw new IllegalStateException("The following Coq term is not supported: " + anythingElse.toCoqCode)
   }
 
   private def blockTermToTreeHuggerAstList(term: Term): List[Tree] = term match {
@@ -194,7 +191,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
       }
       TYPE_TUPLE(allTupleTypesIn(tupleDef))
     case anythingElse =>
-      throw new IllegalStateException("The following Coq type is not supported: " + anythingElse.toCoqCode);
+      throw new IllegalStateException("The following Coq type is not supported: " + anythingElse.toCoqCode)
   }
 
   private def createApplication(functionTerm: Term, arguments: List[Argument]): Tree = {
@@ -307,7 +304,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
             case Name(None) => PARAM(WILDCARD)
           }))
 
-    val Binders(bindersList) = binders;
+    val Binders(bindersList) = binders
     val params = bindersList.flatMap {
       case ExplicitSimpleBinder(name)              => convertNamesToAnonFunParams(List(name), None)
       case ExplicitBinderWithType(names, typeTerm) => convertNamesToAnonFunParams(names, Some(typeTerm))
@@ -447,7 +444,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
     case ImplicitBinder(_, None)             => true
     case ExplicitBinderWithType(_, _)        => false
     case anythingElse =>
-      throw new IllegalStateException("The following parameter notation is not supported: " + anythingElse.toCoqCode);
+      throw new IllegalStateException("The following parameter notation is not supported: " + anythingElse.toCoqCode)
   }
 
   private def convertTypeBinders(typeBinders: List[Binder]): List[TypeDefTreeStart] =
@@ -467,7 +464,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
     }
 
   private def partitionParams(binders: Binders): (List[TypeDefTreeStart], List[ValDef]) = {
-    val Binders(bindersList) = binders;
+    val Binders(bindersList) = binders
 
     val (typeParams, params) = bindersList.partition(isTypeBinder)
 
@@ -556,7 +553,7 @@ class ScalaOfCoq(coqTrees: List[Sentence], curryingStrategy: CurryingStrategy) {
       case NumberPattern(Number(n))              => toNat(n)
       case ParenthesisOrPattern(orPatterns)      => convertTuple(orPatterns, convertOrPattern)
       case anythingElse =>
-        throw new IllegalStateException("The following Coq pattern is not yet supported: " + anythingElse.toCoqCode);
+        throw new IllegalStateException("The following Coq pattern is not yet supported: " + anythingElse.toCoqCode)
     }
 
     def convertNameToPatternVar(name: Name) =

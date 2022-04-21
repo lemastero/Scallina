@@ -1,6 +1,5 @@
 package scala.of.coq.parsercombinators.parser
 
-import scala.annotation.migration
 import scala.util.parsing.combinator.PackratParsers
 import scala.util.parsing.combinator.syntactical.StandardTokenParsers
 
@@ -187,7 +186,7 @@ object CoqParser extends StandardTokenParsers with PackratParsers {
 
   private lazy val name: P[Name] = {
     accept("name", {
-      case id @ Identifier(name) => Name(Some(Ident(name)))
+      case Identifier(name) => Name(Some(Ident(name)))
       case CoqLexer.Keyword("_") => Name(None)
     })
   }
@@ -230,7 +229,7 @@ object CoqParser extends StandardTokenParsers with PackratParsers {
 
   // TODO (Joseph Bakouny): The stringLiteral production is not used yet. It should either be used or removed.
   private lazy val stringLiteral: P[StringLit] = {
-    accept("string literal", { case lit @ StringLit(name) => lit })
+    accept("string literal", { case lit : StringLit => lit })
   }
 
   private lazy val parenthesis: P[BetweenParenthesis] =
@@ -469,7 +468,7 @@ object CoqParser extends StandardTokenParsers with PackratParsers {
     private lazy val infixPattern: P[InfixPattern] =
       pattern ~ "::" ~ pattern ^^ { case left ~ op ~ right => InfixPattern(left, op, right) }
 
-    protected def constructorPattern: P[ConstructorPattern];
+    protected def constructorPattern: P[ConstructorPattern]
 
     private lazy val qualidPattern: P[QualidPattern] =
       qualid ^^ { QualidPattern(_) }

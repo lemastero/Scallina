@@ -1,6 +1,5 @@
 package scala.of.coq.parsercombinators.lexer
 
-import scala.annotation.migration
 import scala.util.parsing.combinator.lexical.StdLexical
 import scala.util.parsing.input.CharArrayReader
 import scala.util.parsing.input.CharArrayReader.EofCh
@@ -28,7 +27,7 @@ object CoqLexer extends StdLexical {
       else (scanner.first) :: parseAllTokensHelper(scanner.rest)
     }
 
-    parseAllTokensHelper(scanner);
+    parseAllTokensHelper(scanner)
   }
 
   override def whitespace: Parser[Any] = rep[Any](

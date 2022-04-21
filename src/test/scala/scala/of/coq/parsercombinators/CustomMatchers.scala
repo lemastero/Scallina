@@ -21,7 +21,7 @@ trait CustomMatchers {
   class TokenParserMatcher[T](expected: T) extends Matcher[CoqParser.ParseResult[T]] {
 
     def apply(left: CoqParser.ParseResult[T]) = {
-      val actual = Option(left.getOrElse(null));
+      val actual = Option(left.getOrElse(null))
 
       MatchResult(
         actual == Some(expected),
@@ -35,7 +35,7 @@ trait CustomMatchers {
     def apply(left: CoqParser.ParseResult[List[Sentence]]) = {
 
       val expectedCode = normalizeWhitespace(expected)
-      val actualCode = normalizeWhitespace(left.map(new ScalaOfCoq(_, curryingStrategy).generateScalaCode).getOrElse(left.toString));
+      val actualCode = normalizeWhitespace(left.map(new ScalaOfCoq(_, curryingStrategy).generateScalaCode).getOrElse(left.toString))
 
       MatchResult(
         actualCode == expectedCode,
@@ -48,7 +48,7 @@ trait CustomMatchers {
   class LexemMatcher[T](expected: T) extends Matcher[CoqLexer.ParseResult[T]] {
 
     def apply(left: CoqLexer.ParseResult[T]) = {
-      val actual = Option(left.getOrElse(null));
+      val actual = Option(left.getOrElse(null))
 
       MatchResult(
         actual == Some(expected),
