@@ -54,7 +54,7 @@ import scala.of.coq.parsercombinators.compiler.Currify
 class ScalaOfCoqCurrifiedFileBasedTest extends AnyFunSuite {
 
   def fileToString(directory: String, extension: String)(fileName: String): String = {
-    val fileBufferedSource = io.Source.fromURL(getClass.getResource(directory + "/" + fileName + "." + extension));
+    val fileBufferedSource = io.Source.fromURL(getClass.getResource(directory + "/" + fileName + "." + extension))
     try fileBufferedSource.mkString finally fileBufferedSource.close()
   }
 

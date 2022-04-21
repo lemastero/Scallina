@@ -479,7 +479,7 @@ case class FunAnnotation(anonFun: Fun, ident: Ident) extends Annotation {
  * This is just a helper case class used in the case class MatchItem, it is not present in the original grammar.
  */
 case class MatchItemPattern(id: Qualid, patterns: List[Pattern]) extends Pattern {
-  def toCoqCode: String = id.toCoqCode + (if (patterns.isEmpty) "" else " ") + patterns.map(_.toCoqCode).mkString(" ");
+  def toCoqCode: String = id.toCoqCode + (if (patterns.isEmpty) "" else " ") + patterns.map(_.toCoqCode).mkString(" ")
 }
 
 case class MatchItem(term: Term, name: Option[Name], matchItemPattern: Option[MatchItemPattern]) extends CoqAST {
@@ -495,11 +495,11 @@ case class ReturnType(term: Term) extends CoqAST {
 }
 
 case class PatternEquation(orMultPatterns: List[MultPattern], outputTerm: Term) extends CoqAST {
-  def toCoqCode: String = orMultPatterns.map(_.toCoqCode).mkString(" | ") + " => " + outputTerm.toCoqCode;
+  def toCoqCode: String = orMultPatterns.map(_.toCoqCode).mkString(" | ") + " => " + outputTerm.toCoqCode
 }
 
 case class MultPattern(patterns: List[Pattern]) extends CoqAST {
-  def toCoqCode: String = patterns.map(_.toCoqCode).mkString(" , ");
+  def toCoqCode: String = patterns.map(_.toCoqCode).mkString(" , ")
 }
 
 // Start of Pattern
@@ -510,11 +510,11 @@ sealed trait Pattern extends CoqAST
  * Warning: infix patterns are not represented in the official Coq grammar!
  */
 case class InfixPattern(left: Pattern, op: String, right: Pattern) extends Pattern {
-  def toCoqCode: String = left.toCoqCode + " " + op + " " + right.toCoqCode;
+  def toCoqCode: String = left.toCoqCode + " " + op + " " + right.toCoqCode
 }
 
 case class ConstructorPattern(id: Qualid, patterns: List[Pattern]) extends Pattern {
-  def toCoqCode: String = id.toCoqCode + " " + patterns.map(_.toCoqCode).mkString(" ");
+  def toCoqCode: String = id.toCoqCode + " " + patterns.map(_.toCoqCode).mkString(" ")
 }
 
 case class QualidPattern(id: Qualid) extends Pattern {

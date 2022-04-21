@@ -35,7 +35,7 @@ class InductiveCoqLexerTest extends AnyFunSuite {
   "Inductive ExceptionM (A : Type) `
   "  Return (a : A)
   "| Raise (e: Exception).
-  """.stripMargin('"');
+  """.stripMargin('"')
 
   test("Coq Lexer succeeds in parsing valid Coq code") {
     CoqLexer.parseAllTokens(validCoqCode) shouldEqual expectedLexerOutput

@@ -469,7 +469,7 @@ object CoqParser extends StandardTokenParsers with PackratParsers {
     private lazy val infixPattern: P[InfixPattern] =
       pattern ~ "::" ~ pattern ^^ { case left ~ op ~ right => InfixPattern(left, op, right) }
 
-    protected def constructorPattern: P[ConstructorPattern];
+    protected def constructorPattern: P[ConstructorPattern]
 
     private lazy val qualidPattern: P[QualidPattern] =
       qualid ^^ { QualidPattern(_) }

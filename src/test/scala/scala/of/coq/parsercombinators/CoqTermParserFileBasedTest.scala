@@ -47,7 +47,7 @@ import CustomMatchers.parse
 class CoqTermParserFileBasedTest extends AnyFunSuite {
 
   def fileToString(fileName: String): String = {
-    val fileBufferedSource = io.Source.fromURL(getClass.getResource("/TermFragments/" + fileName));
+    val fileBufferedSource = io.Source.fromURL(getClass.getResource("/TermFragments/" + fileName))
     try fileBufferedSource.mkString finally fileBufferedSource.close()
   }
 

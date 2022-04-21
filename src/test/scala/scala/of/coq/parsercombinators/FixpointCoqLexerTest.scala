@@ -42,7 +42,7 @@ class FixpointCoqLexerTest extends AnyFunSuite {
   "  0 => 0
   "| S p =>  plus p (sum_n p)
   "end.
-  """.stripMargin('"');
+  """.stripMargin('"')
 
   test("Coq Lexer succeeds in parsing valid Coq code") {
     CoqLexer.parseAllTokens(validCoqCode) shouldEqual expectedLexerOutput

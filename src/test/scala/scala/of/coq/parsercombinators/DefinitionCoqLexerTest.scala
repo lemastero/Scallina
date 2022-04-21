@@ -26,7 +26,7 @@ class DefinitionCoqLexerTest extends AnyFunSuite {
   val invalidCoqCode =
     """
   "Definition f x ` plus x 1.
-  """.stripMargin('"');
+  """.stripMargin('"')
 
   test("Coq Lexer succeeds in parsing valid Coq code") {
     CoqLexer.parseAllTokens(validCoqCode) shouldEqual expectedLexerOutput

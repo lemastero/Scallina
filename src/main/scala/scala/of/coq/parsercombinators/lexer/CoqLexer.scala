@@ -28,7 +28,7 @@ object CoqLexer extends StdLexical {
       else (scanner.first) :: parseAllTokensHelper(scanner.rest)
     }
 
-    parseAllTokensHelper(scanner);
+    parseAllTokensHelper(scanner)
   }
 
   override def whitespace: Parser[Any] = rep[Any](
